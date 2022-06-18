@@ -3,7 +3,7 @@ from random import randint
 import pygame
 from pygame import MOUSEBUTTONDOWN
 
-from scene import Scene
+from .scene import Scene
 from state import State
 
 

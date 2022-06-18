@@ -10,8 +10,8 @@ from state import State
 class App:
     def __init__(self):
         pygame.init()
-        self.fps = pygame.time.Clock()
-        self.fps.tick(60)
+        self.fps = 60
+        self.frames = pygame.time.Clock()
         self.background = (0, 0, 0)
         self.screen = pygame.display.set_mode((640, 480))
         self.running = True
@@ -36,6 +36,7 @@ class App:
                 self.check_stop(event)
                 self.scene.update(event)
             pygame.display.update()
+            self.frames.tick(self.fps)
         pygame.quit()
         sys.exit()
 
