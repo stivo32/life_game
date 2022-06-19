@@ -6,7 +6,9 @@ import pygame
 class Scene(ABC):
     @abstractmethod
     def __init__(self, app):
-        pass
+        self.app = app
+        self.width = 0
+        self.height = 0
 
     @abstractmethod
     def update(self, event: pygame.event.Event):

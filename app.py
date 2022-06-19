@@ -1,7 +1,7 @@
 import sys
 
 import pygame
-
+import pygame.color
 from scenes.color_changer import ColorChanger
 from scenes.menu import Menu
 from state import State
@@ -12,7 +12,7 @@ class App:
         pygame.init()
         self.fps = 60
         self.frames = pygame.time.Clock()
-        self.background = (0, 0, 0)
+        self.background = pygame.Color('white')
         self.screen = pygame.display.set_mode((640, 480))
         self.running = True
         self.state = State.menu
