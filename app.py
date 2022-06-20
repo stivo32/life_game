@@ -2,7 +2,7 @@ import sys
 
 import pygame
 import pygame.color
-from scenes.color_changer import ColorChanger
+
 from scenes.life_game import LifeGame
 from scenes.menu import Menu
 from state import State

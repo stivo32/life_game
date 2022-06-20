@@ -1,12 +1,10 @@
-from random import randint
 from typing import Optional
 
 import pygame
 from pygame.locals import *
 
-from .scene import Scene
-from state import State
 from buttons.start_button import StartButton
+from .scene import Scene
 
 
 class Menu(Scene):
@@ -18,20 +16,23 @@ class Menu(Scene):
         pygame.display.set_caption('Menu')
         self.start_button = StartButton(self)
         self.objects = [self.start_button]
-        self.clickables = [self.start_button]
 
     def update(self, event: Optional[pygame.event.Event] = None):
         self.app.screen.fill(self.app.background)
-        self.draw_objects()
+        self._draw_objects()
         if event is None:
             return
         if event.type == MOUSEBUTTONDOWN:
-            self.click_update(event)
+            self._click_update(event)
 
-    def draw_objects(self):
+    def _draw_objects(self):
         for obj in self.objects:
-            self.app.screen.blit(obj, (obj.x, obj.y))
+            self.app.screen.blit(obj, (obj.left, obj.top))
 
-    def click_update(self, event: pygame.event.Event):
-        for obj in self.clickables:
+    def _click_update(self, event: pygame.event.Event):
+        for obj in self._clickable:
             obj.update(event)
+
+    @property
+    def _clickable(self):
+        return [obj for obj in self.objects if hasattr(obj, 'clickable')]
