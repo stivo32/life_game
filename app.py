@@ -3,6 +3,7 @@ import sys
 import pygame
 import pygame.color
 from scenes.color_changer import ColorChanger
+from scenes.life_game import LifeGame
 from scenes.menu import Menu
 from state import State
 
@@ -10,7 +11,7 @@ from state import State
 class App:
     def __init__(self):
         pygame.init()
-        self.fps = 60
+        self.fps = 4
         self.frames = pygame.time.Clock()
         self.background = pygame.Color('white')
         self.screen = pygame.display.set_mode((640, 480))
@@ -21,7 +22,7 @@ class App:
     def set_scene(self):
         scene_mapper = {
             State.menu: Menu,
-            State.game: ColorChanger
+            State.game: LifeGame
         }
         self.scene = scene_mapper[self.state](self)
 
@@ -31,10 +32,13 @@ class App:
 
     def run(self):
         self.set_scene()
+        pygame.display.update()
         while self.running:
             for event in pygame.event.get():
                 self.check_stop(event)
                 self.scene.update(event)
+            else:
+                self.scene.update()
             pygame.display.update()
             self.frames.tick(self.fps)
         pygame.quit()

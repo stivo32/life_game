@@ -1,4 +1,5 @@
 from random import randint
+from typing import Optional
 
 import pygame
 from pygame.locals import *
@@ -19,16 +20,13 @@ class Menu(Scene):
         self.objects = [self.start_button]
         self.clickables = [self.start_button]
 
-    def update(self, event: pygame.event.Event):
+    def update(self, event: Optional[pygame.event.Event] = None):
         self.app.screen.fill(self.app.background)
         self.draw_objects()
-
+        if event is None:
+            return
         if event.type == MOUSEBUTTONDOWN:
             self.click_update(event)
-            if event.button == 1:
-                self.app.background = [randint(0, 255) for _ in range(3)]
-            elif event.button == 2:
-                self.app.change_state(State.game)
 
     def draw_objects(self):
         for obj in self.objects:
