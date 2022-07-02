@@ -9,10 +9,7 @@ from .scene import Scene
 
 class Menu(Scene):
     def __init__(self, app):
-        self.app = app
-        self.width = 640
-        self.height = 480
-        self.app.screen = pygame.display.set_mode((self.width, self.height))
+        super().__init__(app)
         pygame.display.set_caption('Menu')
         self.start_button = StartButton(self)
         self.objects = [self.start_button]

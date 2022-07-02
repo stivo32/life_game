@@ -6,6 +6,7 @@ import pygame
 from pygame.constants import *
 
 from scenes.scene import Scene
+from settings import START_DENSITY
 
 
 def performance(method):
@@ -20,11 +21,8 @@ def performance(method):
 
 class LifeGame(Scene):
     def __init__(self, app):
-        self.app = app
-        self.width = 720
-        self.height = 560
+        super().__init__(app)
         self.cell_size = 10
-        self.app.screen = pygame.display.set_mode((self.width, self.height))
         self.cell_color = 'Red'
         pygame.display.set_caption('Life')
         self.app.background = (255, 255, 255)
@@ -50,7 +48,7 @@ class LifeGame(Scene):
     def _fill_matrix(self) -> None:
         for i, row in enumerate(self.matrix):
             for j, _ in enumerate(row):
-                self.matrix[i][j] = random() > 0.5
+                self.matrix[i][j] = random() > START_DENSITY
 
     def _draw_matrix(self):
         for i, row in enumerate(self.matrix):

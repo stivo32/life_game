@@ -6,15 +6,16 @@ import pygame.color
 from scenes.life_game import LifeGame
 from scenes.menu import Menu
 from state import State
+from settings import WINDOW_SIZE, FPS
 
 
 class App:
     def __init__(self):
         pygame.init()
-        self.fps = 4
+        self.fps = FPS
         self.frames = pygame.time.Clock()
         self.background = pygame.Color('white')
-        self.screen = pygame.display.set_mode((640, 480))
+        self.screen = pygame.display.set_mode(WINDOW_SIZE)
         self.running = True
         self.state = State.menu
         self.scene = None
@@ -34,13 +35,14 @@ class App:
         self.set_scene()
         pygame.display.update()
         while self.running:
+            self.frames.tick(self.fps)
             for event in pygame.event.get():
                 self.check_stop(event)
                 self.scene.update(event)
             else:
                 self.scene.update()
-            pygame.display.update()
-            self.frames.tick(self.fps)
+            pygame.display.flip()
+
         pygame.quit()
         sys.exit()
 
